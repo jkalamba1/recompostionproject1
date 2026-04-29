@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Do They Write? — Mr. R</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --berry: #5C1F37;
+    --berry-mid: #8B3055;
+    --berry-light: #C4809A;
+    --cream: #F7F0E8;
+    --cream-dark: #EDE2D2;
+    --gold: #B8781E;
+    --gold-light: #D4A04A;
+    --gold-pale: #F5E9CF;
+    --ink: #1E1117;
+    --ink-mid: #4A3040;
+    --ink-soft: #7A6070;
+    --teal: #1A6B5A;
+    --teal-light: #3D9982;
+    --white: #FFFFFF;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--cream);
+    font-family: var(--sans);
+    color: var(--ink);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 52px 0 36px;
+    border-bottom: 1px solid var(--cream-dark);
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .header::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 280px;
+    line-height: 1;
+    color: var(--berry-light);
+    opacity: 0.12;
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .header-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--berry-mid);
+    margin-bottom: 16px;
+  }
+  .header-title {
+    font-family: var(--serif);
+    font-size: 54px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--berry);
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .header-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .header-subtitle {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    max-width: 460px;
+    line-height: 1.6;
+  }
+  .header-meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    background: var(--cream-dark);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* ── SECTION LABELS ── */
+  .sec-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--berry-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--cream-dark);
+  }
+
+  /* ── SUBJECT BLOCK ── */
+  .subject-section { margin-bottom: 52px; }
+  .subject-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    border: 1px solid var(--cream-dark);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .subject-card {
+    background: var(--white);
+    padding: 20px 18px;
+  }
+  .subject-card:first-child { border-radius: 12px 0 0 12px; }
+  .subject-card:last-child { border-radius: 0 12px 12px 0; }
+  .subject-card + .subject-card { border-left: 1px solid var(--cream-dark); }
+  .subj-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+  }
+  .dot-berry { background: var(--berry-mid); }
+  .dot-gold { background: var(--gold); }
+  .dot-teal { background: var(--teal); }
+  .subj-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .subj-text {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ── PORTRAIT CALLOUT ── */
+  .portrait-callout {
+    background: var(--berry);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .portrait-initial {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 24px;
+    color: rgba(255,255,255,0.85);
+    flex-shrink: 0;
+  }
+  .portrait-text {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.65;
+  }
+
+  /* ── INVESTIGATION TIMELINE ── */
+  .timeline-section { margin-bottom: 52px; }
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--cream-dark), var(--gold-light), var(--cream-dark));
+  }
+  .tl-step {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .tl-step:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -29px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid;
+    z-index: 2;
+  }
+  .tl-dot-berry { border-color: var(--berry-mid); }
+  .tl-dot-gold { border-color: var(--gold); background: var(--gold); }
+  .tl-dot-teal { border-color: var(--teal); }
+  .tl-phase {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .phase-berry { color: var(--berry-mid); }
+  .phase-gold { color: var(--gold); }
+  .phase-teal { color: var(--teal); }
+  .tl-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 7px;
+    line-height: 1.3;
+  }
+  .tl-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .tl-finding {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    background: var(--gold-pale);
+    border-radius: 6px;
+    padding: 7px 12px;
+    display: inline-block;
+  }
+
+  /* ── QUOTES ── */
+  .quotes-section { margin-bottom: 52px; }
+  .quote-item {
+    border-left: 3px solid;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    background: var(--white);
+    border-radius: 0 8px 8px 0;
+  }
+  .quote-berry { border-color: var(--berry); }
+  .quote-gold { border-color: var(--gold); }
+  .quote-teal { border-color: var(--teal); }
+  .quote-text {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .quote-context {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── THE ANSWER ── */
+  .answer-section { margin-bottom: 52px; }
+  .answer-banner {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 40px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .answer-banner::before {
+    content: 'LOVE';
+    font-family: var(--serif);
+    font-size: 140px;
+    font-weight: 700;
+    position: absolute;
+    right: -8px;
+    bottom: -24px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .answer-q {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+  .answer-word {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .answer-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  /* ── REASONS ── */
+  .reasons-section { margin-bottom: 52px; }
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .reason-card {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: 12px;
+    padding: 22px 18px;
+  }
+  .reason-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .num-berry { color: var(--berry); }
+  .num-gold { color: var(--gold); }
+  .num-teal { color: var(--teal); }
+  .reason-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .reason-body {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  /* ── WHAT WRITING DOES ── */
+  .mechanics-section { margin-bottom: 52px; }
+  .mechanics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .mech-card {
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .mech-card-berry { background: var(--berry); }
+  .mech-card-gold { background: var(--gold); }
+  .mech-card-teal { background: var(--teal); }
+  .mech-card-cream { background: var(--cream-dark); border: 1px solid #d4c9b8; }
+  .mech-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.75;
+  }
+  .mech-card-berry .mech-label, .mech-card-gold .mech-label, .mech-card-teal .mech-label { color: rgba(255,255,255,0.8); }
+  .mech-card-cream .mech-label { color: var(--ink-soft); }
+  .mech-text {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .mech-card-berry .mech-text, .mech-card-gold .mech-text, .mech-card-teal .mech-text { color: rgba(255,255,255,0.92); }
+  .mech-card-cream .mech-text { color: var(--ink-mid); }
+  .mech-wide { grid-column: 1 / -1; }
+
+  /* ── FINAL REFLECTION ── */
+  .final-section { margin-bottom: 0; }
+  .final-card {
+    border: 1.5px solid var(--berry-light);
+    border-radius: 12px;
+    padding: 32px 36px;
+    position: relative;
+  }
+  .final-label {
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: var(--cream);
+    padding: 0 10px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--berry-mid);
+  }
+  .final-text {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .final-note {
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cream-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 8px;
+  }
+  .footer-left { font-size: 11px; color: var(--ink-soft); }
+  .footer-right { font-size: 11px; color: var(--berry-light); font-style: italic; }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2px;
+    border: 1px solid var(--cream-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 52px;
+  }
+  .stat-box {
+    background: var(--white);
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .stat-box + .stat-box { border-left: 1px solid var(--cream-dark); }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .stat-caption {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-eyebrow">An essay profile · ENGL 1101 · Joshua Kalamba</div>
+  <h1 class="header-title">Why do they <em>write?</em></h1>
+  <p class="header-subtitle">A profile of Mr. R — retirement home manager, husband, and writer of weekly love letters — and the investigation into why.</p>
+  <div class="header-meta">
+    <span class="meta-pill">Georgia State University</span>
+    <span class="meta-pill">Prof. Williams</span>
+    <span class="meta-pill">March 2026</span>
+  </div>
+</header>
+
+<!-- SUBJECT -->
+<section class="subject-section">
+  <div class="sec-label">The subject</div>
+  <div class="subject-grid">
+    <div class="subject-card">
+      <div class="subj-dot dot-berry"></div>
+      <div class="subj-label">On the surface</div>
+      <div class="subj-text">Lanky. Dark-haired. A face of near-permanent neutrality. He moved through the retirement home with authoritative calm — sharp instructions, no idle conversation.</div>
+    </div>
+    <div class="subject-card">
+      <div class="subj-dot dot-gold"></div>
+      <div class="subj-label">The crack in the mask</div>
+      <div class="subj-text">When Mrs. R appeared, everything shifted. His face lightened. His shoulders dropped. He'd touch her arm in passing, lean close to make her smile. Seconds. Then gone.</div>
+    </div>
+    <div class="subject-card">
+      <div class="subj-dot dot-teal"></div>
+      <div class="subj-label">The question it raised</div>
+      <div class="subj-text">Who is this man outside work? That stark gap between the professional and the tender raised one question: does writing have any part in it?</div>
+    </div>
+  </div>
+  <div class="portrait-callout">
+    <div class="portrait-initial">MR</div>
+    <p class="portrait-text">"There was a stark difference between the professional demeanor he carried and the tenderness he confronted his wife with that lasted all but a few seconds." — the observation that started the research</p>
+  </div>
+</section>
+
+<!-- STAT ROW -->
+<div class="stat-row">
+  <div class="stat-box">
+    <div class="stat-num" style="color: var(--berry);">1</div>
+    <div class="stat-caption">Subject profiled</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num" style="color: var(--gold);">2 yrs</div>
+    <div class="stat-caption">Long-distance letters</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num" style="color: var(--teal);">Weekly</div>
+    <div class="stat-caption">Letters written today</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num" style="color: var(--ink-mid);">4</div>
+    <div class="stat-caption">Interview questions</div>
+  </div>
+</div>
+
+<!-- INVESTIGATION -->
+<section class="timeline-section">
+  <div class="sec-label">The investigation</div>
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-dot tl-dot-berry"></div>
+      <div class="tl-phase phase-berry">Step 1 — observation</div>
+      <h3 class="tl-title">Looking for writing at work</h3>
+      <p class="tl-body">As a server at the retirement home, the only writing visible was functional: invoices, paychecks, quick notes to staff. Nothing of substance. His reason for writing was not clear — only that the reason wasn't professional.</p>
+      <span class="tl-finding">Finding: look elsewhere</span>
+    </div>
+    <div class="tl-step">
+      <div class="tl-dot tl-dot-berry"></div>
+      <div class="tl-phase phase-berry">Step 2 — web search</div>
+      <h3 class="tl-title">Searching for him online</h3>
+      <p class="tl-body">A robotic staff biography on the retirement home website — almost certainly not written by him. No social media. No LinkedIn. No published writing of any kind. The absence was itself information: whatever he wrote, it was private.</p>
+      <span class="tl-finding">Finding: writing is outside work scope</span>
+    </div>
+    <div class="tl-step">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-phase phase-gold">Step 3 — the interview</div>
+      <h3 class="tl-title">A Saturday afternoon in the break room</h3>
+      <p class="tl-body">He arrived on time. Sat across with one leg over the other, arms folded, expression unreadable. Then came the question about the origin of his writing — and he answered without hesitation. Everything opened up.</p>
+      <span class="tl-finding">Finding: the answer is love</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes-section">
+  <div class="sec-label">In his own words</div>
+
+  <div class="quote-item quote-berry">
+    <p class="quote-text">"I asked him once what he was writing. He said: 'Everything I cannot say aloud.'"</p>
+    <div class="quote-context">Mr. R recalling his father — who composed letters to his mother at the kitchen table every night after dinner. The phrase became a philosophy before Mr. R ever chose it consciously.</div>
+  </div>
+
+  <div class="quote-item quote-gold">
+    <p class="quote-text">"I noticed I was saying things in those letters I could not say in person. Things I meant deeply, but that felt too large for a conversation."</p>
+    <div class="quote-context">On the two years he spent apart from his future wife, writing to her weekly. He discovered that letters could carry weight that conversation couldn't hold.</div>
+  </div>
+
+  <div class="quote-item quote-berry">
+    <p class="quote-text">"You cannot write as fast as you feel — so you have to choose what matters."</p>
+    <div class="quote-context">On the mechanics of writing: how the physical slowness of putting words down forces emotional precision. Feeling is fast. Writing is a filter.</div>
+  </div>
+
+  <div class="quote-item quote-teal">
+    <p class="quote-text">"A letter stays. You can hold it. You can come back to it when you need to remember. A letter is a record that someone saw you."</p>
+    <div class="quote-context">On why he still writes to his wife every week — even though they live and work together in the same building. The letter isn't about logistics. It's about evidence of being known.</div>
+  </div>
+</section>
+
+<!-- THE ANSWER -->
+<section class="answer-section">
+  <div class="sec-label">The answer</div>
+  <div class="answer-banner">
+    <div class="answer-q">Why does Mr. R write?</div>
+    <div class="answer-word">Love.</div>
+    <p class="answer-desc">Not productivity. Not habit. Not professional obligation. Mr. R writes because it is the most precise and lasting form of love he knows how to give. Writing forces the slowness that feeling never allows — and produces something the spoken word cannot: an artifact you can hold, return to, and be seen by.</p>
+  </div>
+</section>
+
+<!-- THREE REASONS -->
+<section class="reasons-section">
+  <div class="sec-label">Why writing? Three reasons that converged</div>
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <div class="reason-num num-berry">I</div>
+      <div class="reason-title">It began with inheritance</div>
+      <p class="reason-body">His father modeled it silently at the kitchen table. The phrase "everything I cannot say aloud" became a life philosophy before Mr. R ever consciously chose writing as his medium.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-num num-gold">II</div>
+      <div class="reason-title">Distance proved it</div>
+      <p class="reason-body">Two years apart from the woman he would marry showed him that letters could carry what spoken conversation couldn't — depth, weight, permanence. The medium was tested under pressure and survived.</p>
+    </div>
+    <div class="reason-card">
+      <div class="reason-num num-teal">III</div>
+      <div class="reason-title">Proximity hasn't stopped it</div>
+      <p class="reason-body">He writes to his wife every week. They share a home, a building, a life. The letters continue because they were never about logistics. They are about being witnessed — intentionally, in writing, every week.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WRITING DOES -->
+<section class="mechanics-section">
+  <div class="sec-label">What writing does — according to Mr. R</div>
+  <div class="mechanics-grid">
+    <div class="mech-card mech-card-berry">
+      <div class="mech-label">Slows the mind</div>
+      <p class="mech-text">"You cannot write as fast as you feel" — writing introduces a productive lag between emotion and expression.</p>
+    </div>
+    <div class="mech-card mech-card-gold">
+      <div class="mech-label">Forces selection</div>
+      <p class="mech-text">The slowness compels a question: what actually matters? What, from everything felt, is worth putting into permanent form?</p>
+    </div>
+    <div class="mech-card mech-card-teal">
+      <div class="mech-label">Creates permanence</div>
+      <p class="mech-text">A letter stays. Unlike a conversation — which ends, fades, and is half-remembered — a letter can be held and returned to.</p>
+    </div>
+    <div class="mech-card mech-card-cream mech-wide">
+      <div class="mech-label">Bears witness</div>
+      <p class="mech-text">"A letter is a record that someone saw you." The deepest function of writing, for Mr. R, is not communication but recognition. It says: I looked at you carefully enough to put it into words.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL REFLECTION -->
+<section class="final-section">
+  <div class="final-card">
+    <div class="final-label">Closing lines of the essay</div>
+    <p class="final-text">"The interview provided useful insight into why Mr. R writes: love. With what was seen in the mere seconds when Mr. R interacted with his wife, and has finally been spoken aloud in the form of a story. The practice of writing was explained to be in the form of letters to his loved one which originated from a parent at the kitchen table. Mr. R explained that a letter is a record that someone saw you. It seems worth noting that this essay is one too."</p>
+    <div class="final-note">— Joshua Kalamba, ENGL 1101, Georgia State University, March 2026</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">Why Do They Write? · ENGL 1101 · Prof. Williams</div>
+  <div class="footer-right">A letter is a record that someone saw you.</div>
+</footer>
+
+</body>
+</html>
